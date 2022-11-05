@@ -1,3 +1,4 @@
+echo "Select the folder containing the Excel files to be combined, merged file will be in C:\Merged.xls when complete."
 Function Select-FolderDialog
 {
     param([string]$Description="Select Folder",[string]$RootFolder="Desktop")
