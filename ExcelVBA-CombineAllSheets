@@ -1,0 +1,33 @@
+Sub Merge_Sheets()
+    'Insert a new worksheet
+    Sheets.Add
+    
+    'Rename the new worksheet
+    ActiveSheet.Name = "Merged_Sheet"
+    
+    'Loop through worksheets and copy the to your new worksheet
+    For Each ws In Worksheets
+        ws.Activate
+        
+        'Don't copy the merged sheet again
+        If ws.Name <> "Merged_Sheet" Then
+            ws.UsedRange.Select
+            Selection.Copy
+            Sheets("Merged_Sheet").Activate
+            
+            'Select the last filled cell
+            ActiveSheet.Range("A1048576").Select
+            Selection.End(xlUp).Select
+            
+            'For the first worksheet you don't need to go down one cell
+            If ActiveCell.Address <> "$A$1" Then
+                ActiveCell.Offset(1, 0).Select
+            End If
+            
+           
+            ActiveSheet.Paste
+        
+        End If
+        
+    Next
+End Sub
